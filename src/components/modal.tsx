@@ -17,13 +17,12 @@ export default function Modal({
 }: {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  selected: string;
+  selected: number;
 }) {
   let [error, setError] = useState("");
   let [name, setName] = useState("");
 
   let reserveItem = async () => {
-    console.log(selected);
     // Do stuff
     try {
       const response = await fetch("/api/reserve", {
