@@ -7,6 +7,7 @@ import { client } from "@/util/prisma";
 import Modal from "@/components/modal";
 import { useState } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(ctx: NextPageContext) {
   let gifts = await client.gift.findMany();
@@ -22,6 +23,12 @@ export const metadata: Metadata = {
 export default function Home({ gifts }: { gifts: Gift[] }) {
   let [open, setOpen] = useState(false);
   let [selected, setSelected] = useState(0);
+
+  const router = useRouter();
+  // Call this function whenever you want to refresh props!
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
 
   let SelectItem = (id: number) => {
     setSelected(id);
@@ -75,7 +82,12 @@ export default function Home({ gifts }: { gifts: Gift[] }) {
             ))}
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} selected={selected} />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        selected={selected}
+        refreshData={refreshData}
+      />
     </>
   );
 }

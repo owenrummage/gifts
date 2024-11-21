@@ -14,10 +14,12 @@ export default function Modal({
   open,
   setOpen,
   selected,
+  refreshData,
 }: {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
   selected: number;
+  refreshData: any;
 }) {
   let [error, setError] = useState("");
   let [name, setName] = useState("");
@@ -40,6 +42,7 @@ export default function Modal({
         throw new Error("Network response was not ok");
       }
       setOpen(false);
+      refreshData();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
