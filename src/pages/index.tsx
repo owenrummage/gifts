@@ -1,16 +1,23 @@
 import Image from "next/image";
 import localFont from "next/font/local";
 import Card from "@/components/card";
-import { NextPageContext } from "next";
+import { Metadata, NextPageContext } from "next";
 import { Gift } from "@prisma/client";
 import { client } from "@/util/prisma";
 import Modal from "@/components/modal";
 import { useState } from "react";
+import Head from "next/head";
 
 export async function getServerSideProps(ctx: NextPageContext) {
   let gifts = await client.gift.findMany();
   return { props: { gifts } };
 }
+
+export const metadata: Metadata = {
+  title: "Owens Christmas Wishlist",
+  description:
+    "A list of gifts curated by Owen for christmas gifts. Garunteed to be the best!",
+};
 
 export default function Home({ gifts }: { gifts: Gift[] }) {
   let [open, setOpen] = useState(false);
@@ -23,6 +30,9 @@ export default function Home({ gifts }: { gifts: Gift[] }) {
 
   return (
     <>
+      <Head>
+        <title>Owens Wishlist</title>
+      </Head>
       <div className="flex flex-col p-12 w-screen h-screen">
         <div id="header">
           <h1 className="text-6xl font-bold">Wishlist</h1>
