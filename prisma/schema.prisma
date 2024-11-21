@@ -14,13 +14,14 @@ datasource db {
 }
 
 model Gift {
-  id           Int    @id @default(autoincrement())
-  name         String @unique
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
   purchaseURL  String
   imageURL     String
   price        Int
   priority     Int
   category     String
-  instructions String @default("")
-  reservedBy   String @default("")
+  instructions String  @default("")
+  reservedBy   String  @default("")
+  active       Boolean @default(true)
 }

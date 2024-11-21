@@ -68,6 +68,7 @@ export default function Home({ gifts }: { gifts: Gift[] }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 gap-12">
           {gifts
+            .filter((a: Gift) => a.active)
             .sort((a: Gift, b: Gift) => a.price - b.price)
             .map((item) => (
               <Card gift={item} onReserve={SelectItem} />
