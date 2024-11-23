@@ -21,6 +21,24 @@ export default async function handler(
       data: [],
     });
 
+  let foundGift = await client.gift.findFirst({
+    where: {
+      id: req.body.id,
+    },
+  });
+
+  if (!foundGift)
+    return res.status(404).json({
+      message: "Gift not found!",
+      data: [],
+    });
+
+  if (foundGift?.reservedBy != "")
+    return res.status(400).json({
+      message: "Gift has already been reserved!",
+      data: [],
+    });
+
   let gift = await client.gift.update({
     where: {
       id: req.body.id,

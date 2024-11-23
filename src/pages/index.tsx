@@ -27,7 +27,10 @@ export default function Home({ gifts }: { gifts: Gift[] }) {
   const router = useRouter();
   // Call this function whenever you want to refresh props!
   const refreshData = () => {
-    router.replace(router.asPath);
+    router.push({
+      pathname: router.pathname, // not router.asPath
+      query: { confirm: true },
+    });
   };
 
   let SelectItem = (id: number) => {

@@ -34,15 +34,20 @@ export default function Modal({
         },
         body: JSON.stringify({
           name: name,
-          id: selected,
+          id: 2,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        let json = await response.json();
+
+        setError(
+          `API Error: ${json.message ? json.message : "Network response was not ok"}`,
+        );
+      } else {
+        setOpen(false);
+        refreshData();
       }
-      setOpen(false);
-      refreshData();
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -70,7 +75,11 @@ export default function Modal({
                     You are about to reserve an item
                   </DialogTitle>
 
-                  {error ? `<h1 className="text-red-500">${error}</h1>` : ""}
+                  {error ? (
+                    <h1 className="text-red-500 text-lg my-2">{error}</h1>
+                  ) : (
+                    ""
+                  )}
                   <div className="mt-2">
                     <p className="text-sm text-gray-200">
                       You are about to reserve an item. This action cannot be
