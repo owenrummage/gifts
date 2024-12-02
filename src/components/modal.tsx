@@ -34,7 +34,7 @@ export default function Modal({
         },
         body: JSON.stringify({
           name: name,
-          id: 2,
+          id: selected,
         }),
       });
 
