@@ -12,7 +12,7 @@ export default function Card({
   onReserve: (id: number) => void;
 }) {
   return (
-    <div className="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-lg shadow">
+    <div className="w-full max-w-sm bg-zinc-100 dark:bg-zinc-900 dark:border dark:border-zinc-800 rounded-lg shadow">
       <a href={gift.purchaseURL} className="mb-auto">
         <img
           className="p-2 rounded-2xl"
@@ -22,7 +22,7 @@ export default function Card({
       </a>
       <div className="px-2 pb-5 mt-4">
         <a href={gift.purchaseURL}>
-          <h5 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">
+          <h5 className="text-xl font-semibold tracking-tight dark:text-white">
             {gift.name}
           </h5>
         </a>
@@ -66,8 +66,12 @@ export default function Card({
 
         {gift.instructions != "" ? (
           <div className="mb-5">
-            <h4 className="text-md font-bold">Buying Instructions</h4>
-            <p className="text-gray-300">{gift.instructions}</p>
+            <h4 className="dark:text-white text-md font-bold">
+              Buying Instructions
+            </h4>
+            <p className="text-gray-900 dark:text-gray-300">
+              {gift.instructions}
+            </p>
           </div>
         ) : (
           <div className="mb-5"></div>
